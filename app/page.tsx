@@ -30,103 +30,25 @@ export default function Home() {
         {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       </AnimatePresence>
 
+      {/* Single global shader behind everything */}
+      <CyberneticGridShader />
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: contentReady ? 1 : 0 }}
         transition={{ duration: 0.5 }}
+        style={{ position: "relative", zIndex: 1 }}
       >
-        <div className="app-container" style={{ position: "relative" }}>
-          <CyberneticGridShader />
+        <NavBar />
 
-          <NavBar />
-          <div
-            className="overlay-content"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              color: "#ffffff",
-            }}
-          >
-            <HeroSection />
-          </div>
-        </div>
-
-        <div className="app-container" style={{ position: "relative" }}>
-          <CyberneticGridShader />
-
-          <div
-            className="overlay-content"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              color: "#ffffff",
-            }}
-          >
-            <AboutMe />
-          </div>
-        </div>
-
-        <div className="app-container" style={{ position: "relative" }}>
-          <CyberneticGridShader />
-
-          <div
-            className="overlay-content"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              color: "#ffffff",
-            }}
-          >
-            <Skills />
-          </div>
-        </div>
-
-        <div className="app-container" style={{ position: "relative" }}>
-          <CyberneticGridShader />
-
-          <div
-            className="overlay-content"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              color: "#ffffff",
-            }}
-          >
-            <Projects />
-          </div>
-        </div>
-
-        <div className="app-container" style={{ position: "relative" }}>
-          <CyberneticGridShader />
-
-          <div
-            className="overlay-content"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              color: "#ffffff",
-            }}
-          >
-            <GithubStats />
-          </div>
-        </div>
-
-        <div className="app-container" style={{ position: "relative" }}>
-          <CyberneticGridShader />
-
-          <div
-            className="overlay-content"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              color: "#ffffff",
-            }}
-          >
-            <Contact />
-          </div>
-        </div>
-
+        <HeroSection />
+        <AboutMe />
+        <Skills />
+        <Projects />
+        <GithubStats />
+        <Contact />
         <Footer />
+
         <WhatsAppButton />
         <ChatBot />
       </motion.div>

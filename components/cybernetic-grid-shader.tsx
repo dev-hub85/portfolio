@@ -15,7 +15,9 @@ const CyberneticGridShader = () => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const clock = new THREE.Clock();
+    // Use THREE.Timer instead of deprecated THREE.Clock
+    // Use THREE.Timer for time tracking (replace deprecated THREE.Clock)
+    const timer = new THREE.Timer();
 
     // 2) GLSL Shaders
     const vertexShader = `
@@ -109,15 +111,32 @@ const CyberneticGridShader = () => {
     window.addEventListener("resize", onResize);
     onResize(); // set initial size
 
-    // 5) Mouse handler
-    const onMouseMove = (e: MouseEvent) => {
-      uniforms.iMouse.value.set(e.clientX, container.clientHeight - e.clientY);
+    // 5) Mouse and Touch handler
+    interface MouseEventWithClient extends MouseEvent {
+      clientX: number;
+      clientY: number;
+    }
+
+    const updateMouse = (x: number, y: number) => {
+      uniforms.iMouse.value.set(x, container!.clientHeight - y);
+    };
+
+    const onMouseMove = (e: MouseEventWithClient) => {
+      updateMouse(e.clientX, e.clientY);
     };
     window.addEventListener("mousemove", onMouseMove);
 
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        updateMouse(touch.clientX, touch.clientY);
+      }
+    };
+    window.addEventListener("touchmove", onTouchMove);
+
     // 6) Animation loop
     renderer.setAnimationLoop(() => {
-      uniforms.iTime.value = clock.getElapsedTime();
+      uniforms.iTime.value = timer.getElapsed();
       renderer.render(scene, camera);
     });
 
@@ -125,6 +144,7 @@ const CyberneticGridShader = () => {
     return () => {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
 
       renderer.setAnimationLoop(null);
 
@@ -138,7 +158,6 @@ const CyberneticGridShader = () => {
       renderer.dispose();
     };
   }, []);
-
   return (
     <div
       ref={containerRef}

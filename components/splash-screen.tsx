@@ -26,8 +26,8 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.08,
-        duration: 0.5,
+        delay: i * 0.045, // faster stagger
+        duration: 0.32, // faster animation
         ease: "easeInOut" as const,
       },
     }),

@@ -69,7 +69,7 @@ const itemVariants = {
 export default function AboutMe() {
   return (
     <section
-      className="relative w-full flex items-center justify-center px-4 py-24"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center px-8 py-10 sm:px-8 md:px-16 sm:py-16 md:py-24"
       id="about"
     >
       <motion.div
@@ -77,7 +77,7 @@ export default function AboutMe() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.05, margin: "0px 0px -50px 0px" }}
       >
         {/* About Me Section Header */}
         <motion.p
@@ -119,7 +119,7 @@ export default function AboutMe() {
         {/* Stats Cards Section - Square Format */}
         <motion.div
           variants={itemVariants}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
         >
           {[
             { number: "20+", label: "Projects Completed" },
@@ -131,7 +131,7 @@ export default function AboutMe() {
               key={index}
               whileHover={{ scale: 1.05, y: -5 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative rounded-xl border border-blue-400/40 backdrop-blur-xl p-6 text-center group hover:border-purple-400/80 transition-all duration-300 flex flex-col items-center justify-center overflow-hidden"
+              className="relative rounded-xl border border-blue-400/40 backdrop-blur-xl p-5 sm:p-6 text-center group hover:border-purple-400/80 transition-all duration-300 flex flex-col items-center justify-center overflow-hidden min-h-[110px]"
               style={{
                 background:
                   "linear-gradient(135deg, rgb(35, 47, 71) 0%, rgba(59, 130, 246, 0.15) 100%)",
@@ -146,10 +146,10 @@ export default function AboutMe() {
                 }}
               />
               <div className="relative z-10">
-                <h3 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-400 mb-2">
                   {stat.number}
                 </h3>
-                <p className="text-white/70 text-sm md:text-base font-medium">
+                <p className="text-white/70 text-xs sm:text-sm md:text-base font-medium">
                   {stat.label}
                 </p>
               </div>
