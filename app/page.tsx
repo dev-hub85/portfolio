@@ -1,57 +1,54 @@
-"use client";
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import CyberneticGridShader from "@/components/cybernetic-grid-shader";
-import HeroSection from "@/components/hero-section";
-import AboutMe from "@/components/about-me";
-import Skills from "@/components/skills";
-import Projects from "@/components/projects";
-import GithubStats from "@/components/github-stats";
-import Contact from "@/components/contact";
-import Footer from "@/components/footer";
+import SmoothScroll from "@/components/smooth-scroll";
+import IntroLoader from "@/components/intro-loader";
+import Universe from "@/components/cosmos/universe";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
+import Hero from "@/components/sections/hero";
+import Manifesto from "@/components/sections/manifesto";
+import About from "@/components/sections/about";
+import Skills from "@/components/sections/skills";
+import Work from "@/components/sections/work";
+import WorldScene from "@/components/sections/world-scene";
+import Workshop from "@/components/sections/workshop";
+import FlightLog from "@/components/sections/flight-log";
+import Contact from "@/components/sections/contact";
 import WhatsAppButton from "@/components/whatsapp-button";
 import ChatBot from "@/components/chat-bot";
-import SplashScreen from "@/components/splash-screen";
-import NavBar from "@/components/navBar";
+import { worlds } from "@/lib/worlds";
 
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(true);
-  const [contentReady, setContentReady] = useState(false);
-
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-    setContentReady(true);
-  };
-
   return (
     <>
-      <AnimatePresence>
-        {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
-      </AnimatePresence>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SmoothScroll />
+      <IntroLoader />
 
-      {/* Single global shader behind everything */}
-      <CyberneticGridShader />
+      <div className="sky" aria-hidden="true" />
+      <Universe />
+      <div className="scrim" aria-hidden="true" />
+      <div className="grain" aria-hidden="true" />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: contentReady ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-        style={{ position: "relative", zIndex: 1 }}
-      >
-        <NavBar />
+      <SiteHeader />
 
-        <HeroSection />
-        <AboutMe />
+      <main id="main">
+        <Hero />
+        <Manifesto />
+        <About />
         <Skills />
-        <Projects />
-        <GithubStats />
+        <Work />
+        {worlds.map((world, i) => (
+          <WorldScene key={world.slug} world={world} index={i} />
+        ))}
+        <Workshop />
+        <FlightLog />
         <Contact />
-        <Footer />
+      </main>
 
-        <WhatsAppButton />
-        <ChatBot />
-      </motion.div>
+      <SiteFooter />
+      <WhatsAppButton />
+      <ChatBot />
     </>
   );
 }

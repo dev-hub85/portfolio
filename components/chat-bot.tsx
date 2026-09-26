@@ -99,7 +99,7 @@ export default function ChatBot() {
       {/* Chat Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300"
+        className="fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-ember text-void flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-ember/30 transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Toggle chat"
@@ -147,14 +147,15 @@ export default function ChatBot() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
+              data-lenis-prevent
               className="fixed z-50 w-[90%] max-w-[350px] sm:w-[400px] h-[500px] rounded-xl overflow-hidden shadow-2xl border border-white/10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:left-auto sm:top-auto sm:right-24 sm:bottom-6 sm:translate-x-0 sm:translate-y-0"
               style={{
                 background:
-                  "linear-gradient(145deg, rgba(15, 23, 42, 0.98) 0%, rgba(10, 15, 30, 0.99) 100%)",
+                  "linear-gradient(145deg, rgba(12, 13, 20, 0.98) 0%, rgba(5, 6, 10, 0.99) 100%)",
               }}
             >
               {/* Header */}
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 flex items-center justify-between">
+              <div className="bg-ember text-void px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                     <Bot className="w-6 h-6 text-white" />
@@ -193,8 +194,8 @@ export default function ChatBot() {
                     <div
                       className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${
                         message.role === "user"
-                          ? "bg-purple-500/20 text-purple-400"
-                          : "bg-blue-500/20 text-blue-400"
+                          ? "bg-violet/20 text-violet"
+                          : "bg-ember/15 text-ember"
                       }`}
                     >
                       {message.role === "user" ? (
@@ -206,7 +207,7 @@ export default function ChatBot() {
                     <div
                       className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                         message.role === "user"
-                          ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
+                          ? "bg-ember text-void"
                           : "bg-white/10 text-white/90"
                       }`}
                     >
@@ -229,7 +230,7 @@ export default function ChatBot() {
                     animate={{ opacity: 1 }}
                     className="flex gap-2"
                   >
-                    <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-ember/15 text-ember flex items-center justify-center">
                       <Bot className="w-4 h-4" />
                     </div>
                     <div className="bg-white/10 rounded-2xl px-4 py-2">
@@ -252,13 +253,13 @@ export default function ChatBot() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask about skills, projects..."
-                    className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500/60 text-sm"
+                    className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-cyan/60 text-sm"
                     disabled={isLoading}
                   />
                   <button
                     type="submit"
                     disabled={isLoading || !input.trim()}
-                    className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-10 h-10 rounded-full bg-ember text-void flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-4 h-4" />
                   </button>
